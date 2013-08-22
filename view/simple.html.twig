@@ -3,28 +3,84 @@
 {% block title%}Drukuj{%endblock%}
 
 {% block css %}
-    <link rel="stylesheet" href="resource/css/print.css" type="text/css"/>
+    <link rel="stylesheet" href="/csm/resource/css/simpleprint.css" type="text/css"/>
 {% endblock %}
     {% block body %}
 <div id="lol">
- <br>{{sheet.getName}}
- <br>{{sheet.getRace.getName}}
- <br>{{sheet.getAppearance}}
- <br>{{sheet.getArchetype}}
- <br>{{sheet.getDescription}}
- <br>{{sheet.getExp}}
+ <br>{{sheet.getName()}}
+ 
+ <br>rasa:  {{sheet.getRace.getName}}
+ 
+ <br>wygląd:  {{sheet.getAppearance()}}
+ 
+ <br>archetyp: {{sheet.getArchetype()}}
+ 
+ <br>opis: {{sheet.getDescription()}}
+ 
+ <br>doświadczenie: {{sheet.getExp()}}<br>
+ 
+ 
+ 
+ <br> umiejętności bojowe: <br>
+ 
+  
+  {% set t1 = [1, 20, 21,10 ,4 ] %}
+  {% for id in t1 %}
+ {%if sheet.getSkill(id).getValue == 0%}
+ {%else%}
+   {{sheet.getSkill(id).getName}}
+ {%if sheet.getSkill(id).getValue <= 12%}
+ k{{sheet.getSkill(id).getValue}} 
+ {%else%}k12+{{sheet.getSkill(id).getValue - 12}}{%endif%}
+ <br>{%endif%}
+ {%endfor%}
+ 
+
+  
+ <br>{% for attribute in sheet.getAttributes %}
+ {{attribute.getName}}
+ {%if attribute.getValue <= 12%}
+ k{{attribute.getValue}} 
+ {%else%}k12+{{attribute.getValue - 12}}{%endif%}
+ <br>{%endfor%}
+ 
+ <br>kość ruchu: k{{sheet.getRunDie()}}
+ <br>Ilość kart inicjatywy: {{sheet.getInitiativeCards()}}
+ <br>Minimalna karta inicjatywy:{{sheet.getInitiativeMinimum()}}
+ 
+ <br>Tempo:{{sheet.getPace()}}
+<br>Obrona:{{sheet.getParry()}}
+ <br>Wytrzymałość:{{sheet.getToughness()}}
+ <br>Charyzma:{{sheet.getCharisma()}}
+ <br>
+ 
+ <br>Przewagi:
  <br>{% for edge in sheet.getEdges %}
  {{edge.getName}}
- {%endfor%}
+ <br>{%endfor%}
+ <br>
+ Zawady:
  <br>{% for hindrance in sheet.getHindrances %}
  {{hindrance.getName}}
- {%endfor%}
+ <br>{%endfor%}
+ <br>
+ 
+ Umiejętnośći:
  <br>{% for skill in sheet.getSkills %}
  {{skill.getName}}
  {%if skill.getValue <= 12%}
  k{{skill.getValue}} 
  {%else%}k12+{{skill.getValue - 12}}{%endif%}
+ <br>{%endfor%}
+ 
+ <br>{% for power in sheet.getPowers %}
+ {{power.getName}}
  {%endfor%}
+ 
+ 
+ 
+
+ 
         
 </div>
     {% endblock %}

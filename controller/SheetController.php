@@ -103,7 +103,7 @@ class SheetController extends Controller
 	public function simpleAction($id)
 	{
 		$rep = new SheetRepository();
-		$sheet = $rep->getById($id);
+		$sheet = $rep->getById(4);
 		$content = $this->getView()->render('simple.html.twig', array("sheet" => $sheet));
 		return new Response($content);
 	}
