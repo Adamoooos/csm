@@ -68,6 +68,9 @@
  Umiejętnośći:
  <br>{% for skill in sheet.getSkills %}
  {{skill.getName}}
+ {%if skill.getId == 1 or skill.getId == 20 or skill.getId == 21 or skill.getId == 10 or skill.getId }
+ k{{skill.getValue}} 
+ {%else%}k12+{{skill.getValue - 12}}{%endif%}
  {%if skill.getValue <= 12%}
  k{{skill.getValue}} 
  {%else%}k12+{{skill.getValue - 12}}{%endif%}
