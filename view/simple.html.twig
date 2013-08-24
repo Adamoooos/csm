@@ -5,11 +5,15 @@
 {% block css %}
     <link rel="stylesheet" href="/csm/resource/css/simpleprint.css" type="text/css"/>
 {% endblock %}
-    {% block body %}
+    
+{% block body %}
 <div id="lol">
- <br>{{sheet.getName()}}
+    <div id="strona">
+ <div id="imieirasa"><div id="name">{{sheet.getName()}}</div>
  
- <br>rasa:  {{sheet.getRace.getName}}
+ rasa:  {{sheet.getRace.getName}}</div>
+ <div id="opis">
+ <br>doświadczenie: {{sheet.getExp()}}
  
  <br>wygląd:  {{sheet.getAppearance()}}
  
@@ -17,14 +21,37 @@
  
  <br>opis: {{sheet.getDescription()}}
  
- <br>doświadczenie: {{sheet.getExp()}}<br>
  
  
+ </div>
  
- <br> umiejętności bojowe: <br>
+
  
   
-  {% set t1 = [1, 20, 21,10 ,4 ] %}
+  
+ 
+
+  <div id="atrybuty">
+      
+ <table>        
+ {% for attribute in sheet.getAttributes %}
+ <tr>
+     <td>
+     {{attribute.getName|slice(0, 2)}}
+     </td>
+     <td>
+      {%if attribute.getValue <= 12%}{{attribute.getValue}}{%else%}k12+{{attribute.getValue - 12}}{%endif%}
+     </td>
+</tr>
+{%endfor%}
+</table>  
+ </div>
+ 
+ 
+ 
+ <div id="walka">
+  <br> umiejętności bojowe: <br>
+ {% set t1 = [1, 20, 21,10 ,4 ] %}
   {% for id in t1 %}
  {%if sheet.getSkill(id).getValue == 0%}
  {%else%}
@@ -34,24 +61,18 @@
  {%else%}k12+{{sheet.getSkill(id).getValue - 12}}{%endif%}
  <br>{%endif%}
  {%endfor%}
+ </div>
  
-
-  
- <br>{% for attribute in sheet.getAttributes %}
- {{attribute.getName}}
- {%if attribute.getValue <= 12%}
- k{{attribute.getValue}} 
- {%else%}k12+{{attribute.getValue - 12}}{%endif%}
- <br>{%endfor%}
  
- <br>kość ruchu: k{{sheet.getRunDie()}}
- <br>Ilość kart inicjatywy: {{sheet.getInitiativeCards()}}
- <br>Minimalna karta inicjatywy:{{sheet.getInitiativeMinimum()}}
+ 
  
  <br>Tempo:{{sheet.getPace()}}
 <br>Obrona:{{sheet.getParry()}}
  <br>Wytrzymałość:{{sheet.getToughness()}}
  <br>Charyzma:{{sheet.getCharisma()}}
+ <br>kość ruchu: k{{sheet.getRunDie()}}
+ <br>Ilość kart inicjatywy: {{sheet.getInitiativeCards()}}
+ <br>Minimalna karta inicjatywy:{{sheet.getInitiativeMinimum()}}
  <br>
  
  <br>Przewagi:
@@ -65,16 +86,16 @@
  <br>{%endfor%}
  <br>
  
- Umiejętnośći:
+ Umiejętności:
  <br>{% for skill in sheet.getSkills %}
- {{skill.getName}}
- {%if skill.getId == 1 or skill.getId == 20 or skill.getId == 21 or skill.getId == 10 or skill.getId }
+{%if skill.getId not in t1%} 
+{{skill.getName}}
+{%if skill.getValue <= 12%}
  k{{skill.getValue}} 
- {%else%}k12+{{skill.getValue - 12}}{%endif%}
- {%if skill.getValue <= 12%}
- k{{skill.getValue}} 
- {%else%}k12+{{skill.getValue - 12}}{%endif%}
- <br>{%endfor%}
+ {%else%}k12+{{skill.getValue - 12}}{%endif%} <br>
+{%endif%}
+ 
+ {%endfor%}
  
  <br>{% for power in sheet.getPowers %}
  {{power.getName}}
@@ -84,6 +105,6 @@
  
 
  
-        
+        </div>
 </div>
     {% endblock %}

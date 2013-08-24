@@ -1,6 +1,6 @@
 #lol {
 
-height: 297mm;
+
 width: 210mm;
 background-color: yellow;
 color: red;
@@ -8,5 +8,52 @@ color: red;
 }
 
 
+#strona {
+    width: 208mm;
+    margin  : auto;
+    border  : 1mm solid black;
+    padding : 0px;
+}
+
+#name {font-size: 35px;
+    
+    
+}
 
 
+
+#imieirasa {
+    
+    border  : none;
+    padding : 5mm;
+    width   : 55mm;
+    float   : left;
+}
+
+#opis {
+    
+    border  : none;
+    padding : 0mm;
+    width   : 130mm;
+    float   : right;
+}
+
+
+#atrybuty {
+    width: 40mm;
+    float: left;
+    margin-top: 5mm;
+    margin-left: 5mm;
+}
+
+#walka {
+    width: 45mm;
+    height: 50mm;
+    float: left;
+}
+
+
+#komorka{
+    height: 10mm;
+    width: 10mm;
+}
